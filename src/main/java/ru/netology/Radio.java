@@ -50,7 +50,7 @@ public class Radio {
         if (newSoundVolume > 100) {
             return;
         }
-            soundVolume = newSoundVolume;
+        soundVolume = newSoundVolume;
     }
 
     // увеличение громкости

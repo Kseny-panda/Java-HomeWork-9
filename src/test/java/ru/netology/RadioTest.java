@@ -11,27 +11,28 @@ public class RadioTest {
     @CsvSource({
             "0, -1",
             "0, 10"
-         })
+    })
 
-        public void shouldSetNumber (int expected, int newNumberStation) {
-            Radio service = new Radio();
-            int actuale = service.getNumberStation();
+    public void shouldSetNumber (int expected, int newNumberStation) {
+        Radio service = new Radio();
+        int actuale = service.getNumberStation();
 
-            Assertions.assertEquals(expected, actuale);
-        }
+        Assertions.assertEquals(expected, actuale);
+    }
 
     // Проверка граничных значений громкости
     @ParameterizedTest
     @CsvSource({
             "0, -1",
             "0, 101"
-         })
-        public void shouldSetVolume (int expected, int newSoundVolume) {
-            Radio service = new Radio();
-            int actual = service.getSoundVolume();
+    })
+    public void shouldSetVolume (int expected, int newSoundVolume) {
+        Radio service = new Radio();
+        service.setSoundVolume(newSoundVolume);
+        int actual = service.getSoundVolume();
 
-            Assertions.assertEquals(expected, actual);
-        }
+        Assertions.assertEquals(expected, actual);
+    }
 
     // next - проверка переключения на следующую станцию
     @ParameterizedTest
@@ -40,17 +41,17 @@ public class RadioTest {
             "1, 2",
             "8, 9",
             "9, 0"
-         })
+    })
 
-        public void shouldSetNextStation (int numberStation, int expected) {
-            Radio service = new Radio();
+    public void shouldSetNextStation (int numberStation, int expected) {
+        Radio service = new Radio();
 
-            service.setNumberStation(numberStation);
-            service.nextStation();
-            int actual = service.getNumberStation();
+        service.setNumberStation(numberStation);
+        service.nextStation();
+        int actual = service.getNumberStation();
 
-            Assertions.assertEquals(expected, actual);
-        }
+        Assertions.assertEquals(expected, actual);
+    }
 
     // prev - проверка переключения на предыдущую станцию
     @ParameterizedTest
@@ -59,17 +60,17 @@ public class RadioTest {
             "1, 0",
             "2, 1",
             "9, 8",
-        })
+    })
 
-        public void shouldSetPrevStation (int numberStation, int expected) {
-            Radio service = new Radio();
+    public void shouldSetPrevStation (int numberStation, int expected) {
+        Radio service = new Radio();
 
-            service.setNumberStation(numberStation);
-            service.prevStation();
-            int actual = service.getNumberStation();
+        service.setNumberStation(numberStation);
+        service.prevStation();
+        int actual = service.getNumberStation();
 
-            Assertions.assertEquals(expected, actual);
-        }
+        Assertions.assertEquals(expected, actual);
+    }
 
     // Проверка переключения кнопок радиостанции
     @ParameterizedTest
@@ -80,16 +81,16 @@ public class RadioTest {
             "8, 8",
             "9, 9",
             "10, 0"
-        })
+    })
 
-        public void channelSwitching (int newNumberStation, int expected) {
-            Radio service = new Radio();
+    public void channelSwitching (int newNumberStation, int expected) {
+        Radio service = new Radio();
 
-            service.setNumberStation(newNumberStation);
-            int actual = service.getNumberStation();
+        service.setNumberStation(newNumberStation);
+        int actual = service.getNumberStation();
 
-            Assertions.assertEquals(expected, actual);
-        }
+        Assertions.assertEquals(expected, actual);
+    }
 
     // Проверка увеличения громкости звука
     @ParameterizedTest
@@ -99,16 +100,16 @@ public class RadioTest {
             "98, 99",
             "99, 100",
             "100, 100"
-        })
+    })
 
-        public void increaseVolume (int newSoundVolume, int expected) {
-            Radio service = new Radio();
+    public void increaseVolume (int newSoundVolume, int expected) {
+        Radio service = new Radio();
 
-            service.setSoundVolume(newSoundVolume);
-            service.increaseVolume();
-            int actual = service.getSoundVolume();
+        service.setSoundVolume(newSoundVolume);
+        service.increaseVolume();
+        int actual = service.getSoundVolume();
 
-            Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     // Проверка уменьшения громкости звука
@@ -119,15 +120,15 @@ public class RadioTest {
             "2, 1",
             "99, 98",
             "100, 99"
-        })
+    })
 
-        public void decreaseVolume (int newSoundVolume, int expected) {
-            Radio service = new Radio();
+    public void decreaseVolume (int newSoundVolume, int expected) {
+        Radio service = new Radio();
 
-            service.setSoundVolume(newSoundVolume);
-            service.decreaseVolume();
-            int actual = service.getSoundVolume();
+        service.setSoundVolume(newSoundVolume);
+        service.decreaseVolume();
+        int actual = service.getSoundVolume();
 
-            Assertions.assertEquals(expected, actual);
-        }
+        Assertions.assertEquals(expected, actual);
+    }
 }
