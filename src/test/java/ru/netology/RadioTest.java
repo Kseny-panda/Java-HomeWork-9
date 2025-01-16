@@ -6,7 +6,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
 
-    // Проверка граничных значений номера радиостанции
+    Radio service = new Radio();
+
+    // проверка граничных значений номера радиостанции
     @ParameterizedTest
     @CsvSource({
             "0, -1",
@@ -14,24 +16,21 @@ public class RadioTest {
     })
 
     public void shouldSetNumber (int expected, int newNumberStation) {
-        Radio service = new Radio();
-        int actuale = service.getNumberStation();
 
-        Assertions.assertEquals(expected, actuale);
+        service.setNumberStation(newNumberStation);
+        Assertions.assertEquals(expected, service.getNumberStation());
     }
 
-    // Проверка граничных значений громкости
+    // проверка граничных значений громкости
     @ParameterizedTest
     @CsvSource({
             "0, -1",
             "0, 101"
     })
     public void shouldSetVolume (int expected, int newSoundVolume) {
-        Radio service = new Radio();
-        service.setSoundVolume(newSoundVolume);
-        int actual = service.getSoundVolume();
 
-        Assertions.assertEquals(expected, actual);
+        service.setSoundVolume(newSoundVolume);
+        Assertions.assertEquals(expected, service.getSoundVolume());
     }
 
     // next - проверка переключения на следующую станцию
@@ -44,13 +43,10 @@ public class RadioTest {
     })
 
     public void shouldSetNextStation (int numberStation, int expected) {
-        Radio service = new Radio();
 
         service.setNumberStation(numberStation);
-        service.nextStation();
-        int actual = service.getNumberStation();
-
-        Assertions.assertEquals(expected, actual);
+        service.next();
+        Assertions.assertEquals(expected, service.getNumberStation());
     }
 
     // prev - проверка переключения на предыдущую станцию
@@ -63,16 +59,14 @@ public class RadioTest {
     })
 
     public void shouldSetPrevStation (int numberStation, int expected) {
-        Radio service = new Radio();
 
         service.setNumberStation(numberStation);
-        service.prevStation();
-        int actual = service.getNumberStation();
+        service.prev();
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, service.getNumberStation());
     }
 
-    // Проверка переключения кнопок радиостанции
+    // проверка переключения кнопок радиостанции
     @ParameterizedTest
     @CsvSource({
             "-1, 0",
@@ -84,15 +78,12 @@ public class RadioTest {
     })
 
     public void channelSwitching (int newNumberStation, int expected) {
-        Radio service = new Radio();
 
         service.setNumberStation(newNumberStation);
-        int actual = service.getNumberStation();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, service.getNumberStation());
     }
 
-    // Проверка увеличения громкости звука
+    // проверка увеличения громкости звука
     @ParameterizedTest
     @CsvSource({
             "0, 1",
@@ -103,16 +94,13 @@ public class RadioTest {
     })
 
     public void increaseVolume (int newSoundVolume, int expected) {
-        Radio service = new Radio();
 
         service.setSoundVolume(newSoundVolume);
         service.increaseVolume();
-        int actual = service.getSoundVolume();
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, service.getSoundVolume());
     }
 
-    // Проверка уменьшения громкости звука
+    // проверка уменьшения громкости звука
     @ParameterizedTest
     @CsvSource({
             "0, 0",
@@ -123,12 +111,22 @@ public class RadioTest {
     })
 
     public void decreaseVolume (int newSoundVolume, int expected) {
-        Radio service = new Radio();
 
         service.setSoundVolume(newSoundVolume);
         service.decreaseVolume();
-        int actual = service.getSoundVolume();
+        Assertions.assertEquals(expected, service.getSoundVolume());
+    }
 
-        Assertions.assertEquals(expected, actual);
+    // проверка изменения количества каналов
+    @ParameterizedTest
+    @CsvSource({
+            "6, 7",
+            "16, 17"
+    })
+
+    public void selectingNumberOfStation (int expected, int size) {
+        Radio service = new Radio(size);
+
+        Assertions.assertEquals(expected, service.getMaxNumberStation());
     }
 }
